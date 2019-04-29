@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -899,9 +899,9 @@ MonoBehaviour:
     Everything apart from procedural planet code and logic is my own, all match 3
     logic/code (ie I have written everything which was required in the pdf on my own
     without a 3rd party etc). The procedural planet code was written by Youtuber Sebastian
-    Lague as part of a tutorial, I did not have time to write my own code for the
-    procedural planet and wanted to show that I am capable of intergrating my work
-    with others. I hope this does not violate the instructions given to me.
+    Lague as part of a tutorial and edited by me, I did not have time to write my
+    own code for the procedural planet and wanted to show that I am capable of intergrating
+    my work with others. I hope this does not violate the instructions given to me.
 
 
     INSTRUCTIONS:
@@ -998,12 +998,12 @@ MonoBehaviour:
   m_margin: {x: 11.965439, y: 6.837311, z: 10.256165, w: 1.8461914}
   m_textInfo:
     textComponent: {fileID: 981582967}
-    characterCount: 1224
+    characterCount: 1241
     spriteCount: 0
-    spaceCount: 218
-    wordCount: 211
+    spaceCount: 222
+    wordCount: 215
     linkCount: 0
-    lineCount: 26
+    lineCount: 44
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1652,7 +1652,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2101736855}
   m_Direction: 2
   m_Value: 1.0000006
-  m_Size: 0.48896918
+  m_Size: 0.5011963
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

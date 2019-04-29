@@ -10,4 +10,6 @@ public class Level : ScriptableObject
     public ShapeSettings shapeSettings;
 
     public ColourSettings colourSettings;
+
+    public int totalMoves;
 }

@@ -17,9 +17,18 @@ public class TileManager : MonoBehaviour
     public Planet planet;
 
     public TMPro.TMP_Text[] stats;
+    public TMPro.TMP_Text moves;
 
     public int[] goals;
     public int[] currentStats;
+
+    public int remainingMoves;
+
+    public GameObject won;
+    public GameObject lost;
+
+    public int currentLevel;
+    public int levelCompletion;
 
     void Start()
     {
@@ -27,10 +36,21 @@ public class TileManager : MonoBehaviour
 
         goals = GlobalSceneVariables.level.goals;
 
+        remainingMoves = GlobalSceneVariables.level.totalMoves;
+
+        currentLevel = GlobalSceneVariables.level.levelNumber;
+
+        if (PlayerPrefs.HasKey("levelCompletion"))
+        {
+            levelCompletion = PlayerPrefs.GetInt("levelCompletion");
+        }
+
         for (int i = 0; i < goals.Length; i++)
         {
             stats[i].text = currentStats[i].ToString() + " : " + goals[i];
         }
+
+        moves.text = "Moves: " + remainingMoves.ToString();
     }
 
     //Periodically checks for new matches, very janky but couldn't be bothered making a system to check for recently fallen tiles.
@@ -64,49 +84,78 @@ public class TileManager : MonoBehaviour
 
     //Change the specs of the planet, everything is / 3 because originally this was called per row but then 
     //I changed it to reward the amount of tiles destroyed and couldn't be bothered dividing all the values by 3 manually ;).
+    //Update Planet Shape every 5 moves.
 
     public void UpdatePlanetSpecs(int tileType, int numTiles)
     {
+        if (remainingMoves <= 0)
+        {
+            EndGame();
+        }
+        moves.text = "Moves: " + remainingMoves.ToString();
         for (int i = 0; i < numTiles; i++)
         {
             if (tileType == 0)
             {
-                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength += 0.005f / 3f;
-                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.strength += 0.2f / 3f;
-                planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.roughness += 0.2f / 3f;
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.roughness += 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.persistence += 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.baseRoughness -= 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.roughness += 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.roughness += 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.baseRoughness += 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength += 0.02f / 3f;
+
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.x+=100;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.y+=100;
 
                 UpdateScore(0, 1);
             }
             else if (tileType == 1)
             {
-                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength -= 0.0025f / 3f;
-                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.strength -= 0.2f / 3f;
-                planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.roughness -= 0.2f / 3f;
+                planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.roughness -= 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.baseRoughness += 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.baseRoughness -= 0.05f / 3f;
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.roughness -= 0.05f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength -= 0.02f / 3f;
+
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.x += 100;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.y += 100;
 
                 UpdateScore(1, 2);
             }
             else if (tileType == 2)
             {
-                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength -= 0.01f / 3f;
-                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.strength += 0.4f / 3f;
-                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.roughness -= 0.4f / 3f;
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.roughness -= 0.05f / 3f;
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.persistence -= 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.baseRoughness += 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.roughness -= 0.1f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.baseRoughness -= 0.05f / 3f;
+
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.x += 100;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.y += 100;
 
                 UpdateScore(2, 0);
             }
             else if (tileType == 3)
             {
-                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.roughness += 0.2f / 3f;
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.roughness += 0.1f / 3f;
                 planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.minValue -= 0.02f / 3f;
-                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.strength += 0.4f / 3f;
                 planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.baseRoughness += 0.4f / 3f;
+
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.x += 100;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.y += 100;
 
                 UpdateScore(3, 4);
 
             }
             else if (tileType == 4)
             {
+                planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.roughness -= 0.1f / 3f;
                 planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.baseRoughness -= 0.4f / 3f;
-                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.minValue += 0.01f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.minValue += 0.02f / 3f;
+
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.x += 100;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre.y += 100;
 
                 UpdateScore(4, 3);
             }
@@ -127,7 +176,7 @@ public class TileManager : MonoBehaviour
 
         for (int i = 0; i < currentStats.Length; i++)
         {
-            if (currentStats[i] <= goals[i])
+            if (currentStats[i] < goals[i])
             {
                 won = false;
             }
@@ -141,6 +190,24 @@ public class TileManager : MonoBehaviour
 
     public void WinGame()
     {
-        //Do Shit.
+        won.SetActive(true);
+        StartCoroutine(LateUpdatePlanet());
+        if (currentLevel > levelCompletion)
+        {
+            levelCompletion++;
+            PlayerPrefs.SetInt("levelCompletion", levelCompletion);
+        }
+    }
+    public void EndGame()
+    {
+        lost.SetActive(true);
+        StartCoroutine(LateUpdatePlanet());
+    }
+
+    //For when won or lost so player can see what they did to the planet.
+    public IEnumerator LateUpdatePlanet()
+    {
+        yield return new WaitForSeconds(1f);
+        planet.GeneratePlanet();
     }
 }

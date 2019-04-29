@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50eec9508ed5fae4c90a506185ef91ab, type: 3}
+  m_Name: 9
+  m_EditorClassIdentifier: 
+  levelNumber: 9
+  goals: 1500000000000000000000000c0000000c000000
+  shapeSettings: {fileID: 11400000, guid: 79db88b3af49cce4891db431a6ecce7e, type: 2}
+  colourSettings: {fileID: 11400000, guid: f623d898f29860a49bd65adb3553822b, type: 2}
+  totalMoves: 40

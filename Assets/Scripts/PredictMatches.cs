@@ -16,6 +16,8 @@ public class PredictMatches : MonoBehaviour
     List<List<GameObject>> possibleMatches = new List<List<GameObject>>();
     List<GameObject> currentPossibleMatch = new List<GameObject>();
 
+    public TileManager manager;
+
     //Check for possible matches on start, if none, reshuffle.
     IEnumerator Start()
     {
@@ -158,7 +160,7 @@ public class PredictMatches : MonoBehaviour
     {
         if (possibleMatches.Count == 0)
         {
-            EndGame();
+            manager.EndGame();
         }
         int chosenMatch = Random.Range(0, possibleMatches.Count);
         for (int i = 0; i < possibleMatches[chosenMatch].Count; i++)
@@ -180,11 +182,5 @@ public class PredictMatches : MonoBehaviour
         {
             possibleMatches[chosenMatch][i].GetComponent<TileSwapper>().DeHighlight();
         }
-    }
-
-    //When no more moves available.
-    public void EndGame()
-    {
-        //Not sure what happens yet.
     }
 }

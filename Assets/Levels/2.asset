@@ -16,3 +16,4 @@ MonoBehaviour:
   goals: 0300000006000000000000000000000003000000
   shapeSettings: {fileID: 11400000, guid: 3dd3402ee1753464288a9c3b956be708, type: 2}
   colourSettings: {fileID: 11400000, guid: d0fcb3e48d611d74997ec68896616c81, type: 2}
+  totalMoves: 15

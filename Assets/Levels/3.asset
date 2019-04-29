@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   levelNumber: 3
-  goals: 0600000006000000030000000600000006000000
+  goals: 0900000003000000030000000600000000000000
   shapeSettings: {fileID: 11400000, guid: 6546d3748be59224baf39c49a2e1bd70, type: 2}
   colourSettings: {fileID: 11400000, guid: 9f73a8bfb8911814484c8b3677f3fa2c, type: 2}
+  totalMoves: 20

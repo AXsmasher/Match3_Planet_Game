@@ -154,12 +154,18 @@ public class TileSwapper : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         CheckAllTiles();
+        manager.remainingMoves--;
 
         yield return new WaitForSeconds(1f);
 
         if (pastTile != null)
         {
             Switch();
+            manager.remainingMoves++;
+        }
+        else if (manager.remainingMoves % 5 == 0)
+        {
+            StartCoroutine(manager.LateUpdatePlanet());
         }
         manager.currentlySelected.transform.GetChild(0).GetComponent<Renderer>().material = manager.currentlySelected.GetComponent<TileSwapper>().normal;
         manager.currentlySelected.GetComponent<TileSwapper>().DeHighlight();
