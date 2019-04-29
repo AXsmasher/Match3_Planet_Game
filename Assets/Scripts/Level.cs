@@ -7,5 +7,7 @@ public class Level : ScriptableObject
 
     public int[] goals;
 
-    public float[] planetStartSpecs;
+    public ShapeSettings shapeSettings;
+
+    public ColourSettings colourSettings;
 }

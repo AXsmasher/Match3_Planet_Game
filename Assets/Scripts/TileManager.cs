@@ -24,6 +24,13 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         planet = GameObject.Find("Planet").GetComponent<Planet>();
+
+        goals = GlobalSceneVariables.level.goals;
+
+        for (int i = 0; i < goals.Length; i++)
+        {
+            stats[i].text = currentStats[i].ToString() + " : " + goals[i];
+        }
     }
 
     //Periodically checks for new matches, very janky but couldn't be bothered making a system to check for recently fallen tiles.
@@ -64,7 +71,7 @@ public class TileManager : MonoBehaviour
         {
             if (tileType == 0)
             {
-                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength += 0.01f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength += 0.005f / 3f;
                 planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.strength += 0.2f / 3f;
                 planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.roughness += 0.2f / 3f;
 
@@ -72,7 +79,7 @@ public class TileManager : MonoBehaviour
             }
             else if (tileType == 1)
             {
-                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength -= 0.01f / 3f;
+                planet.shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.strength -= 0.0025f / 3f;
                 planet.shapeSettings.noiseLayers[1].noiseSettings.ridgidNoiseSettings.strength -= 0.2f / 3f;
                 planet.shapeSettings.noiseLayers[2].noiseSettings.simpleNoiseSettings.roughness -= 0.2f / 3f;
 
@@ -120,7 +127,7 @@ public class TileManager : MonoBehaviour
 
         for (int i = 0; i < currentStats.Length; i++)
         {
-            if (currentStats[i] < goals[i])
+            if (currentStats[i] <= goals[i])
             {
                 won = false;
             }

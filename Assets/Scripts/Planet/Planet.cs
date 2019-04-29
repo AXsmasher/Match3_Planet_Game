@@ -28,6 +28,9 @@ public class Planet : MonoBehaviour
 
     void Start()
     {
+        shapeSettings = Instantiate(GlobalSceneVariables.level.shapeSettings);
+        colourSettings = Instantiate(GlobalSceneVariables.level.colourSettings);
+        shapeSettings.noiseLayers[0].noiseSettings.simpleNoiseSettings.centre = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
         GeneratePlanet();
     }
 
