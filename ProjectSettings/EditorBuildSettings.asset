@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/Scenes/WelcomeMobile.unity
+    guid: 6d591c0b36df2f544acd28d2f0eba520
+  - enabled: 0
+    path: Assets/Scenes/LevelsMobile.unity
+    guid: 3b09d52a3263cb145b36240cd4d57b92
+  - enabled: 0
+    path: Assets/Scenes/Mobile.unity
+    guid: c3c964afdfb0f4946972431bdfab9bae
   m_configObjects: {}

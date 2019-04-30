@@ -56,7 +56,8 @@ public class TileSwapper : MonoBehaviour
 
     //Next three functions just fire appropriate functions.
 
-    void OnMouseOver()
+    
+    void OnMouseOver() //Take this out for mobile builds.
     {
         Highlight();
     }

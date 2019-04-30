@@ -12,4 +12,9 @@ public class SwitchScene : MonoBehaviour
     {
         GlobalSceneVariables.level = level;
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
