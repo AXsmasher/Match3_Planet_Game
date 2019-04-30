@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlaceTiles : MonoBehaviour
 {
-    //This file has a lot of comments cause it was the first script I wrote.
-    //Should give you a good understanding of how I code, other files will have just enough to understand the functions.
-
     //2d array holding board data.
     public List<List<GameObject>> tiles = new List<List<GameObject>>(); 
     //All tile types.

@@ -42,7 +42,7 @@ public class TileSwapper : MonoBehaviour
         }
     }
 
-    //Check if any tiles are moving.
+    //Check if any tiles are moving. If so player cant do anything.
     void FixedUpdate()
     {
         if (r.velocity.magnitude > 0.01)
@@ -56,10 +56,12 @@ public class TileSwapper : MonoBehaviour
 
     //Next three functions just fire appropriate functions.
 
-    
     void OnMouseOver() //Take this out for mobile builds.
     {
-        Highlight();
+        if (!GlobalSceneVariables.paused)
+        {
+            Highlight();
+        }
     }
 
     void OnMouseExit()
@@ -69,11 +71,14 @@ public class TileSwapper : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (manager.currentlySelected)
+        if (!GlobalSceneVariables.paused)
         {
-            manager.currentlySelected.GetComponent<TileSwapper>().StartCoroutine("Deselect");
+            if (manager.currentlySelected)
+            {
+                manager.currentlySelected.GetComponent<TileSwapper>().StartCoroutine("Deselect");
+            }
+            Select();
         }
-        Select();
     }
 
     //Guess what, it dehighlights a tile.

@@ -188,6 +188,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    //Show win screen.
     public void WinGame()
     {
         won.SetActive(true);
@@ -198,6 +199,7 @@ public class TileManager : MonoBehaviour
             PlayerPrefs.SetInt("levelCompletion", levelCompletion);
         }
     }
+    //Show end screen.
     public void EndGame()
     {
         lost.SetActive(true);

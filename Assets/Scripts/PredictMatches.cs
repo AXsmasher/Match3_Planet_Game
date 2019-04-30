@@ -18,7 +18,7 @@ public class PredictMatches : MonoBehaviour
 
     public TileManager manager;
 
-    //Check for possible matches on start, if none, reshuffle.
+    //Check for possible matches on start, if none, reshuffle. (To reshuffle I just delete all tiles and let the game automatically fill it back up.)
     IEnumerator Start()
     {
         yield return new WaitForSeconds(2f);

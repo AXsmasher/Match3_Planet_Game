@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ListLevels : MonoBehaviour
 {
+    //Just enables unlocked levels
     void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
